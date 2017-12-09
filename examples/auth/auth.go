@@ -6,8 +6,8 @@ import (
 	"log"
 	"strings"
 
-	"github.com/thehowl/fasthttprouter"
 	"github.com/erikdubbelboer/fasthttp"
+	"github.com/thehowl/fasthttprouter"
 )
 
 // basicAuth returns the username and password provided in the request's
