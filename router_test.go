@@ -605,20 +605,21 @@ func TestRouterNotFound(t *testing.T) {
 	router.GET("/", handlerFunc)
 
 	testRoutes := []struct {
-		route string
-		code  int
+		route    string
+		code     int
+		location string
 	}{
-		{"/path/", 301},          // TSR -/
-		{"/dir", 301},            // TSR +/
-		{"/", 200},               // TSR +/
-		{"/PATH", 301},           // Fixed Case
-		{"/DIR", 301},            // Fixed Case
-		{"/PATH/", 301},          // Fixed Case -/
-		{"/DIR/", 301},           // Fixed Case +/
-		{"/paTh/?name=foo", 301}, // Fixed Case With Params +/
-		{"/paTh?name=foo", 301},  // Fixed Case With Params +/
-		{"/../path", 200},        // CleanPath
-		{"/nope", 404},           // NotFound
+		{"/path/", 301, "/path"}, // TSR -/
+		{"/dir", 301, "/dir/"},   // TSR +/
+		//{"", 301, "/"},                           // TSR +/ unsupported by fasthttp
+		{"/PATH", 301, "/path"},                    // Fixed Case
+		{"/DIR", 301, "/dir/"},                     // Fixed Case
+		{"/PATH/", 301, "/path"},                   // Fixed Case -/
+		{"/DIR/", 301, "/dir/"},                    // Fixed Case +/
+		{"/paTh/?name=foo", 301, "/path?name=foo"}, // Fixed Case With Params +/
+		{"/paTh?name=foo", 301, "/path?name=foo"},  // Fixed Case With Params +/
+		{"/../path", 200, ""},                      // CleanPath
+		{"/nope", 404, ""},                         // NotFound
 	}
 
 	s := &fasthttp.Server{
@@ -645,9 +646,14 @@ func TestRouterNotFound(t *testing.T) {
 		if err := resp.Read(br); err != nil {
 			t.Fatalf("Unexpected error when reading response: %s", err)
 		}
-		if !(resp.Header.StatusCode() == tr.code) {
-			t.Errorf("NotFound handling route %s failed: Code=%d want=%d",
-				tr.route, resp.Header.StatusCode(), tr.code)
+		loc := "http://" + tr.location
+		if tr.location == "" {
+			loc = ""
+		}
+		if !(resp.Header.StatusCode() == tr.code &&
+			(tr.code == 404 || string(resp.Header.Peek("Location")) == loc)) {
+			t.Errorf("NotFound handling route %s failed: Code=%d Header=%s",
+				tr.route, resp.Header.StatusCode(), string(resp.Header.Peek("Location")))
 		}
 	}
 
