@@ -5,6 +5,15 @@
 [![GoDoc](http://godoc.org/github.com/thehowl/fasthttprouter?status.svg)](http://godoc.org/github.com/thehowl/fasthttprouter)
 [![GitHub release](https://img.shields.io/github/release/thehowl/fasthttprouter.svg)](https://github.com/thehowl/fasthttprouter/releases)
 
+**thehowl/fasthttprouter** is a fork from the original
+[fasthttprouter](https://github.com/buaazp/fasthttprouter), which in turn is a
+fork from [httprouter](https://github.com/julienschmidt/httprouter). The only
+advantage that this fork brings compared to buaazp's code is that instead of
+using the original fasthttp repo, we're using
+[@erikdubbelboer's fork](https://github.com/erikdubbelboer/fasthttp), since it
+is more updated than the main fork and includes essential patches for the code
+that for some reason valyala is not merging.
+
 FastHttpRouter is forked from [httprouter](https://github.com/julienschmidt/httprouter) which is a lightweight high performance HTTP request router
 (also called *multiplexer* or just *mux* for short) for [fasthttp](https://github.com/erikdubbelboer/fasthttp).
 
@@ -12,11 +21,12 @@ This router is optimized for high performance and a small memory footprint. It s
 
 #### License Related
 
-- The author of `httprouter` [@julienschmidt](https://github.com/julienschmidt) did almost all the hard work of this router.
-- I respect the laws of open source. So LICENSE of `httprouter` is alway stay here: [HttpRouterLicense](HttpRouterLicense).
-- What I do is just fit for `fasthttp`. I have no hope to build a huge but toxic go web framwork like [iris](https://github.com/kataras/iris).
-- I fork this repo is just because there is no router for `fasthttp` at that time. And `fasthttprouter` is the FIRST router for `fasthttp`.
-- `fasthttprouter` has been used in my online production and processes 17 million requests per day. It is fast and stable, so I decide to release a stable version.
+Following the original project, the original license of julienschmidt/httprouter
+is kept at [HttpRouterLicense](HttpRouterLicense), and buaazp placed his license
+on top of that inside of [LICENSE](LICENSE). I simply added a copyright clause
+on top of it.
+
+tl;dr: BSD 3 clause, three times
 
 #### Releases
 
@@ -208,9 +218,3 @@ router.NotFound = fasthttp.FSHandler("./public", 0)
 ```
 
 But this approach sidesteps the strict core rules of this router to avoid routing problems. A cleaner approach is to use a distinct sub-path for serving files, like `/static/*filepath` or `/files/*filepath`.
-
-## Web Frameworks based on FastHttpRouter
-
-If the HttpRouter is a bit too minimalistic for you, you might try one of the following more high-level 3rd-party web frameworks building upon the HttpRouter package:
-
-- Waiting for you to do this...
