@@ -13,7 +13,7 @@
 //     "log"
 //
 //     "github.com/buaazp/fasthttprouter"
-//     "github.com/valyala/fasthttp"
+//     "github.com/erikdubbelboer/fasthttp"
 // )
 
 // func Index(ctx *fasthttp.RequestCtx) {
@@ -76,7 +76,7 @@ package fasthttprouter
 import (
 	"strings"
 
-	"github.com/valyala/fasthttp"
+	"github.com/erikdubbelboer/fasthttp"
 )
 
 var (
@@ -314,11 +314,11 @@ func (r *Router) Handler(ctx *fasthttp.RequestCtx) {
 				} else {
 					uri = path + "/"
 				}
-				
+
 				if len(ctx.URI().QueryString()) > 0 {
 					uri += "?" + string(ctx.QueryArgs().QueryString())
 				}
-				
+
 				ctx.Redirect(uri, code)
 				return
 			}
