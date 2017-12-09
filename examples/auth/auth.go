@@ -6,7 +6,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/buaazp/fasthttprouter"
+	"github.com/thehowl/fasthttprouter"
 	"github.com/erikdubbelboer/fasthttp"
 )
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/buaazp/fasthttprouter"
+	"github.com/thehowl/fasthttprouter"
 	"github.com/erikdubbelboer/fasthttp"
 )
 
