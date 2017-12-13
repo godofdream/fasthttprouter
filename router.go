@@ -75,6 +75,7 @@ package fasthttprouter
 
 import (
 	"strings"
+	"unsafe"
 
 	"github.com/erikdubbelboer/fasthttp"
 )
@@ -293,8 +294,8 @@ func (r *Router) Handler(ctx *fasthttp.RequestCtx) {
 		defer r.recv(ctx)
 	}
 
-	path := string(ctx.Path())
-	method := string(ctx.Method())
+	path := b2s(ctx.Path())
+	method := b2s(ctx.Method())
 	if root := r.trees[method]; root != nil {
 		if f, tsr := root.getValue(path, ctx); f != nil {
 			f(ctx)
@@ -376,4 +377,13 @@ func (r *Router) Handler(ctx *fasthttp.RequestCtx) {
 		ctx.Error(fasthttp.StatusMessage(fasthttp.StatusNotFound),
 			fasthttp.StatusNotFound)
 	}
+}
+
+// b2s converts byte slice to a string without memory allocation.
+// See https://groups.google.com/forum/#!msg/Golang-Nuts/ENgbUzYvCuU/90yGx7GUAgAJ .
+//
+// Note it may break if string and/or slice header will change
+// in the future go versions.
+func b2s(b []byte) string {
+	return *(*string)(unsafe.Pointer(&b))
 }
