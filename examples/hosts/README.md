@@ -15,8 +15,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/thehowl/fasthttprouter"
-	"github.com/erikdubbelboer/fasthttp"
+	"github.com/godofdream/fasthttprouter"
+	"github.com/godofdream/fasthttp"
 )
 
 // Index is the index handler

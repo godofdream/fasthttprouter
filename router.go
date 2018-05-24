@@ -12,8 +12,8 @@
 //     "fmt"
 //     "log"
 //
-//     "github.com/thehowl/fasthttprouter"
-//     "github.com/erikdubbelboer/fasthttp"
+//     "github.com/godofdream/fasthttprouter"
+//     "github.com/godofdream/fasthttp"
 // )
 
 // func Index(ctx *fasthttp.RequestCtx) {
@@ -77,7 +77,7 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/erikdubbelboer/fasthttp"
+	"github.com/godofdream/fasthttp"
 )
 
 var (

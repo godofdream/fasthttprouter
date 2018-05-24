@@ -4,7 +4,7 @@ These examples show you the usage of `fasthttprouter`. You can easily build a we
 
 ### Basic example
 
-This is just a quick introduction, view the [GoDoc](http://godoc.org/github.com/thehowl/fasthttprouter) for details.
+This is just a quick introduction, view the [GoDoc](http://godoc.org/github.com/godofdream/fasthttprouter) for details.
 
 Let's start with a trivial example:
 
@@ -15,8 +15,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/thehowl/fasthttprouter"
-	"github.com/erikdubbelboer/fasthttp"
+	"github.com/godofdream/fasthttprouter"
+	"github.com/godofdream/fasthttp"
 )
 
 // Index is the index handler
